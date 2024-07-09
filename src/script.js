@@ -49,3 +49,25 @@ document.getElementById('contactForm').addEventListener('submit', function(event
             alert('Gagal mengirim email. Silakan coba lagi.');
         });
 });
+
+const text = "Back End Developer";
+const typingSpeed = 100; // Kecepatan mengetik dalam milidetik
+const delayBetweenLoops = 2000; // Waktu tunggu sebelum mulai mengetik ulang dalam milidetik
+
+let index = 0;
+
+function type() {
+    if (index < text.length) {
+        document.getElementById("typewriter-text").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(type, typingSpeed);
+    } else {
+        setTimeout(() => {
+            document.getElementById("typewriter-text").innerHTML = "";
+            index = 0;
+            type();
+        }, delayBetweenLoops);
+    }
+}
+
+window.onload = type;
