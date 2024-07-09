@@ -55,19 +55,24 @@ const typingSpeed = 100; // Kecepatan mengetik dalam milidetik
 const delayBetweenLoops = 2000; // Waktu tunggu sebelum mulai mengetik ulang dalam milidetik
 
 let index = 0;
+let typingInterval;
 
 function type() {
     if (index < text.length) {
         document.getElementById("typewriter-text").innerHTML += text.charAt(index);
         index++;
-        setTimeout(type, typingSpeed);
     } else {
+        clearInterval(typingInterval);
         setTimeout(() => {
             document.getElementById("typewriter-text").innerHTML = "";
             index = 0;
-            type();
+            typingInterval = setInterval(type, typingSpeed);
         }, delayBetweenLoops);
     }
 }
 
-window.onload = type;
+window.onload = () => {
+    document.getElementById("typewriter-text").innerHTML = "";
+    index = 0;
+    typingInterval = setInterval(type, typingSpeed);
+};
